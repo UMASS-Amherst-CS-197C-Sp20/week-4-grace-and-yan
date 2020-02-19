@@ -61,10 +61,10 @@ void print_arr(int *arr, int n){
    ]
 */
 int** build_2darr(int n){
-    int **result = malloc(n * sizeof(int));
+    int **result = calloc(n,n* sizeof(int));
    for (int i = 0; i < n; i++)
    {
-      *(result + i) = (int *)malloc((i + 1) * sizeof(int));
+      *(result + i) = (int *)calloc((i + 1),sizeof(int));
       for (int j = 0; j <= i; j++)
       {
          *(*(result + i) + j) = i;
