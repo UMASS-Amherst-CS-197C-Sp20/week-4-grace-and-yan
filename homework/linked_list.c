@@ -59,8 +59,10 @@ bool list_equals_array(POINTER list, double* array, int array_len) {
   // TODO, do this better!
   for (int i = 0; ((i < array_len) && (list != NULL)); i++)
   {
-    if (list->value == *(array + i * sizeof(double)))
+    if (list->value != *(array + i))
+    {
       return false;
+    }
     list = list->next;
   }
   return true;
@@ -97,14 +99,21 @@ bool remove_value(POINTER start, VALUE value){
     {
       start = start->next;
       return 1;
-      if (start->next->value == (value))
-      {
-        start->next = NULL;
-        return 1;
-      }
-      return 0;
     }
+    if (start->next->value == (value))
+    {
+      start->next = NULL;
+      return 1;
+    }
+    return 0;
   }
+  if (start->value == (value))
+  {
+    start->value = start->next->value;
+    start->next = start->next->next;
+    return 1;
+  }
+ 
   while (start->next->next != NULL)
   {
     if (start->next->value == (value))
